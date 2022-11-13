@@ -26,15 +26,18 @@ contract scoreCard {
         uint hyperledger;
         uint react;
     }
-    
-    // uint public studentId;
+    event studentAdded(uint id,string name);
+    // 
+
     mapping (uint =>studentDetails) public studentDetailMapping;
     mapping (uint =>studentMark) public studentMarkMapping;
-    function addStudent(uint studentId, string memory name, uint mobile) public onlyClassTeacher {
 
+    function addStudent(uint studentId, string memory name, uint mobile) public onlyClassTeacher {
       studentDetailMapping[studentId].mobile = mobile;
       studentDetailMapping[studentId].name = name;
+      emit studentAdded(studentId,name);
     }
+
     function addMark(uint studentId, uint Solidity, uint hyperledger, uint react) public onlyClassTeacher {
       studentMarkMapping[studentId].Solidity = Solidity;
       studentMarkMapping[studentId].hyperledger = hyperledger;
